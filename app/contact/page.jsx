@@ -1,9 +1,10 @@
 import PageLayout from '@/components/PageLayout';
+import ContactContent from '@/components/contact/ContactContent';
 
 const Contact = () => {
   return (
   <PageLayout pageHeading={'Contact Page'} pageDesc={'This is Contact Page'}>
-    <div>Contact form here...</div>
+      <ContactContent />
   </PageLayout>
   )
 }

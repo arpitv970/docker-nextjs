@@ -1,9 +1,10 @@
 import PageLayout from '@/components/PageLayout';
+import AboutContent from '@/components/about/AboutContent';
 
 const About = () => {
   return (
   <PageLayout pageHeading={'About Page'} pageDesc={'This is About Page'}>
-    <div>About us Content</div>
+      <AboutContent />
   </PageLayout>
   )
 }
