@@ -12,16 +12,16 @@ This is a simple `Next.js` web application that takes user's data processes it a
 - Now we have our network, all is left to run containers:
     - `mongo` container:
         ```bash
-            docker run -d \
-            -p 27017:27017 \
-            -e MONGO_INITDB_ROOT_USERNAME=['username of DB'] \
-            -e MONGO_INITDB_ROOT_PASSWORD=['password of DB'] \
-            --name ['name of DB'] \
-            --net ['name of network'] \
-            mongo
+        docker run -d \
+        -p 27017:27017 \
+        -e MONGO_INITDB_ROOT_USERNAME=['username of DB'] \
+        -e MONGO_INITDB_ROOT_PASSWORD=['password of DB'] \
+        --name ['name of DB'] \
+        --net ['name of network'] \
+        mongo
         ```
     - `mongo-express` container:
-    ```bash
+        ```bash
         docker run -d \
         -p 8081:8081 \
         -e ME_CONFIG_MONGODB_ADMINUSERNAME=['username of DB'] \
@@ -30,4 +30,4 @@ This is a simple `Next.js` web application that takes user's data processes it a
         --name ['name of container'] \
         --net ['name of network'] \
         mongo-express
-    ```
+        ```
