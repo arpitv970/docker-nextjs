@@ -1,34 +1,33 @@
-This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+# About this Project
+This is a simple `Next.js` web application that takes user's data processes it and stores it in `MongoDB`, which setup using `docker`. The sole purpose of this project is to understand the working of `docker` while developing a **Full-Stack Web Application**, thus the main focus here is to setting things up in *docker environment*.
 
-## Getting Started
-
-First, run the development server:
-
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-```
-
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
-
-You can start editing the page by modifying `app/page.js`. The page auto-updates as you edit the file.
-
-This project uses [`next/font`](https://nextjs.org/docs/basic-features/font-optimization) to automatically optimize and load Inter, a custom Google Font.
-
-## Learn More
-
-To learn more about Next.js, take a look at the following resources:
-
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
-
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js/) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
+# How it is done in first place
+- Create a desired `Next.js` web app, do some front-end & back-end shit
+- Now we need to create our DB, thus pull official docker images of: `mongo` & `mongo-express`
+- The next step would be to create a network where our DB's resources would be hosted locally, for a time
+    - ```bash
+        docker network create <name of network>
+    
+      ```
+- Now we have our network, all is left to run containers:
+    - `mongo` container:
+        ```bash
+            docker run -d \
+            -p 27017:27017 \
+            -e MONGO_INITDB_ROOT_USERNAME=['username of DB'] \
+            -e MONGO_INITDB_ROOT_PASSWORD=['password of DB'] \
+            --name ['name of DB'] \
+            --net ['name of network'] \
+            mongo
+        ```
+    - `mongo-express` container:
+    ```bash
+        docker run -d \
+        -p 8081:8081 \
+        -e ME_CONFIG_MONGODB_ADMINUSERNAME=['username of DB'] \
+        -e ME_CONFIG_MONGODB_ADMINPASSWORD=['password of DB'] \
+        -e ME_CONFIG_MONGODB_SERVER=['name of cotainer of DB'] \
+        --name ['name of container'] \
+        --net ['name of network'] \
+        mongo-express
+    ```
